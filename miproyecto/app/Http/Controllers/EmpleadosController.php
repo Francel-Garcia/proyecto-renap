@@ -16,10 +16,9 @@ class EmpleadosController extends Controller
     public function index()
     {
         //
-        $datos['empl']=Empleados::paginate(5);
+        $empl = Empleados::paginate(5);
 
-        return view ('empleados.index',$datos);
-      
+        return view ('empleados.index', [ 'empl' => $empl]);
     }
 
     /**
@@ -48,19 +47,21 @@ class EmpleadosController extends Controller
 
        if ($request->hasFile('Foto')){
 
-$datosEmpleados['Foto']=$request->file('Foto')->store('uploads','public');
-
-
+            $datosEmpleados['Foto']=$request->file('Foto')->store('uploads','public');
 
        }
+
+       $existeCedula = Empleados::where('Cedula', $request->Cedula)->first();
+
+       if ($existeCedula != null) {
+            return redirect('/empleados/create')->with('error', 'Cédula ya existe');
+       }
+
        Empleados::insert($datosEmpleados);
-           
            
        // return response()->json($datosEmpleados);
         
-        return redirect('empleados')->with('mensaje','regristo exitoso');
-
-        
+        return redirect('empleados')->with('mensaje','regristo exitoso');        
     }
 
     /**
@@ -116,9 +117,7 @@ $datosEmpleados['Foto']=$request->file('Foto')->store('uploads','public');
        Empleados::where('id','=',$id)->update($datosEmpleados);
 
        $empleados=Empleados::findOrFail($id);
-       return view ('empleados.edit',compact('empleados'));
-
-
+       return view ('empleados.edit', compact('empleados'));
     }
 
     /**

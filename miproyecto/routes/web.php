@@ -14,13 +14,12 @@ use App\http\Controllers\EmpleadosController;
 |
 */
 
-Route::get('/empleados',function (){
-    ///return view('empleados.index');
-    return wiew('auth.login');
-    # code...
-}); 
+// Route::get('/empleados',function (){
+//     ///return view('empleados.index');
+//     return wiew('auth.login');
+//     # code...
+// }); 
 
-Route::get('/empleados/create',[EmpleadosController::class,'create']);
 
 Route::resource('empleados',EmpleadosController::class);
 
@@ -28,6 +27,8 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
+Route::get('/empleados/create',[EmpleadosController::class,'create'])->name('crear-empleado');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

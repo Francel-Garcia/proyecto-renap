@@ -1,10 +1,11 @@
 MOSTRAR LA LISTA DE DATOS DE RENAP 
-@if (Session::has('mensaje'))
-{{ Session::get('mensaje')}} 
-    
-@endif
 
-<a href="{{url('empleados/create')}}"> ir a registrar mas empleados </a>
+@if (Session::has('mensaje'))
+    {{ Session::get('mensaje')}} 
+@endif
+<div>
+    <a href="{{url('empleados/create')}}"> REGISTRAR EMPLEADO </a>
+</div>
 
 <table class="table table-light">
     <thead class="thead-light">

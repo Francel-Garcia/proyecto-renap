@@ -24,6 +24,6 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
-        return wiew('auth.login');
+        // return wiew('auth.login');
     }
 }
